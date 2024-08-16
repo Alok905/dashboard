@@ -1,8 +1,6 @@
 import styles from "@/app/ui/dashboard/users/singleUser/singleUser.module.css";
 import Image from "next/image";
 
-import React from "react";
-
 const SingleUserPage = () => {
   return (
     <div className={styles.container}>
