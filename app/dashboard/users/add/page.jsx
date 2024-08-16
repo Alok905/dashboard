@@ -1,9 +1,10 @@
+import { addUser } from "@/app/lib/actions";
 import styles from "@/app/ui/dashboard/products/addProduct/addProduct.module.css";
 
 const AddUserPage = () => {
   return (
     <div className={styles.container}>
-      <form action="" className={styles.form}>
+      <form action={addUser} className={styles.form}>
         <input type="text" placeholder="username" name="username" required />
         <input type="email" placeholder="email" name="email" required />
         <input
@@ -22,7 +23,7 @@ const AddUserPage = () => {
         </select>
         <select name="isActive" id="isActive">
           <option value={true} selected>
-            Is Admin?
+            Is Active?
           </option>
           <option value={true}>Yes</option>
           <option value={false}>No</option>
