@@ -57,7 +57,7 @@ const ProductsPage = async ({ searchParams }) => {
               <td>{product.stock}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href="/dashboard/products/product_id">
+                  <Link href={`/dashboard/products/${product._id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>

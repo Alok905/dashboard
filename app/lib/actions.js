@@ -31,6 +31,34 @@ export const addUser = async (formData) => {
   redirect("/dashboard/users");
 };
 
+export const updateUser = async (formData) => {
+  const { id, username, email, password, phone, address, isAdmin, isActive } =
+    Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+
+    const updateFields = {
+      username,
+      email,
+      password,
+      phone,
+      address,
+      isAdmin,
+      isActive,
+    };
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+
+    await User.findByIdAndUpdate(id, updateFields);
+    revalidatePath(`/dashboard/users/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deleteUser = async (formData) => {
   const { id } = Object.fromEntries(formData);
   try {
@@ -69,4 +97,31 @@ export const deleteProduct = async (formData) => {
     console.log(error);
   }
   revalidatePath("/dashboard/products");
+};
+
+export const updateProduct = async (formData) => {
+  const { id, title, desc, price, stock, color, size } =
+    Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+
+    const updateFields = {
+      title,
+      desc,
+      price,
+      stock,
+      color,
+      size,
+    };
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+
+    await Product.findByIdAndUpdate(id, updateFields);
+    revalidatePath(`/dashboard/products/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
 };
