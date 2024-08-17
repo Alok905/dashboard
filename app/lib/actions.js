@@ -4,6 +4,7 @@ import { Product, User } from "./models";
 import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
+import { signIn } from "../auth";
 
 export const addUser = async (formData) => {
   const { username, email, password, phone, address, isAdmin, isActive } =
@@ -121,6 +122,16 @@ export const updateProduct = async (formData) => {
 
     await Product.findByIdAndUpdate(id, updateFields);
     revalidatePath(`/dashboard/products/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const authenticate = async (formData) => {
+  const { username, password } = Object.fromEntries(formData);
+
+  try {
+    await signIn("credentials", { username, password });
   } catch (error) {
     console.log(error);
   }
